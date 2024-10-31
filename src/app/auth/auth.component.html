@@ -1,0 +1,32 @@
+<p-button (onClick)="showDialog()" icon="pi pi-user" label="Login" />
+<p-dialog [(visible)]="visible" [modal]="true" closable="true">
+  <ng-template pTemplate="headless">
+    <div
+      class="flex flex-column px-4 py-3 gap-3 auth-container"
+      [formGroup]="form"
+    >
+      <div class="form-auth">Authorization</div>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input id="username" pInputText formControlName="username" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <p-password
+          formControlName="password"
+          [feedback]="false"
+          [toggleMask]="true"
+        />
+      </div>
+      <div class="flex align-items-center gap-2">
+        <p-button label="Sign-In" (onClick)="onSubmit()" class="w-full" />
+        <p-button
+          label="Cancel"
+          (onClick)="closeDialog()"
+          severity="secondary"
+          class="w-full"
+        />
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>

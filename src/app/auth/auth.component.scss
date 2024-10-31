@@ -1,0 +1,15 @@
+.auth-container {
+  background: white;
+}
+
+.form-auth {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
