@@ -31,14 +31,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.items = [
-      {
-        label: 'Profile',
-        icon: 'pi pi-refresh',
-      },
-      {
-        label: 'Log out',
-        icon: 'pi pi-times',
-      },
+      { label: 'Admin' },
+      { label: 'Manager' },
+      { label: 'Director' },
     ];
   }
 }

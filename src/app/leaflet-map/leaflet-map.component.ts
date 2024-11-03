@@ -25,5 +25,18 @@ export class LeafletMapComponent implements OnInit {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.map);
+    const marker = L.marker([51.128258, 71.430524], {
+      draggable: true,
+      autoPan: true,
+    }).addTo(this.map);
+    marker.bindPopup('<b>Baiterek!</b>').openPopup();
+    this.map.on('click', (e: L.LeafletMouseEvent) => {
+      L.marker([e.latlng.lat, e.latlng.lng], {
+        draggable: true,
+        autoPan: true,
+      })
+        .bindPopup('New marker here!')
+        .addTo(this.map);
+    });
   }
 }
