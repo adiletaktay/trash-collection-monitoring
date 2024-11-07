@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
+import data from '../../assets/data/db.json';
 
 @Component({
   selector: 'app-leaflet-map',
@@ -11,9 +12,36 @@ import * as L from 'leaflet';
 export class LeafletMapComponent implements OnInit {
   map: any;
   popupOpened: boolean | undefined;
+  data: any = data;
+
+  constructor() {}
 
   ngOnInit(): void {
     this.configMap();
+  }
+
+  private popupHtml(
+    id: number,
+    isCleaned: boolean = false,
+    comment: string = ''
+  ): string {
+    return `
+      <div class="form-container">
+        <h2>Marker Form</h2>
+        <form>
+          <input type="checkbox" id="checkbox-${id}" ${
+      isCleaned ? 'checked' : ''
+    } value="yes" />
+          <label for="checkbox-${id}">There is no trash</label><br />
+          <div class="form-group" style="margin-bottom: 10px">
+            <textarea id="${id}">${comment}</textarea>
+          </div>
+          <div class="form-buttons" style="display: flex; flex-direction: row; justify-content: space-between; border-radius: 4px;">
+            <button type="button" id="submitButton-${id}">Submit</button>
+            <button type="button" id="cancelButton-${id}">Cancel</button>
+          </div>
+        </form>
+      </div>`;
   }
 
   configMap() {
@@ -32,12 +60,24 @@ export class LeafletMapComponent implements OnInit {
       iconSize: [24, 36],
       popupAnchor: [-1, -12],
     });
-    const marker = L.marker([51.128258, 71.430524], {
-      icon: myIcon,
-      draggable: true,
-      autoPan: true,
-    }).addTo(this.map);
-    marker.bindPopup('<b>Baiterek!</b>').openPopup();
+
+    data.forEach((data: any) => {
+      const jsonMarker: any = L.marker([data.lat, data.lng], {
+        icon: myIcon,
+        draggable: true,
+        autoPan: true,
+      }).addTo(this.map);
+      jsonMarker.bindPopup(
+        this.popupHtml(data.id, data.isCleaned, data.comment),
+        {
+          closeButton: false,
+          closeOnClick: false,
+          autoClose: false,
+        }
+      );
+      jsonMarker.customId = data.id;
+    });
+
     this.map.on('click', (e: L.LeafletMouseEvent) => {
       if (this.popupOpened === true) {
         return;
@@ -49,40 +89,17 @@ export class LeafletMapComponent implements OnInit {
         draggable: true,
         autoPan: true,
       });
-      marker.bindPopup(
-        `<div class="form-container">
-          <h2>Marker Form</h2>
-          <form >
-            <input type="checkbox" value="yes" />
-            <label for="trash">There is no trash</label><br />
-            <div class="form-group" style="margin-bottom: 10px">
-              <textarea id="message" name="message"></textarea>
-            </div>
-            <div
-              class="form-buttons"
-              style="
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                border-radius: 4px;
-              ">
-              <button type="button" id="submitButton-${id}">Submit</button>
-              <button type="button" id="cancelButton-${id}">Cancel</button>
-            </div>
-          </form>
-        </div>`,
-        {
-          closeButton: false,
-          closeOnClick: false,
-          autoClose: false,
-        }
-      );
+      marker.bindPopup(this.popupHtml(id), {
+        closeButton: false,
+        closeOnClick: false,
+        autoClose: false,
+      });
       marker.customId = id;
       marker.addTo(this.map);
     });
+
     this.map.on('popupopen', (e: L.LeafletMouseEvent) => {
       this.popupOpened = true;
-      const me: any = this as any;
       const id = e.popup._source.customId;
       const submitButton = document.getElementById(
         `submitButton-${id}`
@@ -91,10 +108,10 @@ export class LeafletMapComponent implements OnInit {
         `cancelButton-${id}`
       ) as HTMLButtonElement;
       const closePopup = (submit?: any, cancel?: any) => {
-        e.popup.removeFrom(me.map);
+        e.popup.removeFrom(this.map);
         submit?.removeEventListener('click', () => closePopup(), false);
         cancel?.removeEventListener('click', () => closePopup(), false);
-        me.popupOpened = false;
+        this.popupOpened = false;
       };
 
       submitButton.addEventListener(

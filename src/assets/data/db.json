@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "address": "Cemetery",
+    "lat": 51.159196,
+    "lng": 71.448201,
+    "isCleaned": true,
+    "comment": "Good job"
+  },
+  {
+    "id": 2,
+    "address": "Residence",
+    "lat": 51.125835,
+    "lng": 71.446532,
+    "isCleaned": false,
+    "comment": "Hurry up"
+  },
+  {
+    "id": 3,
+    "address": "Seafront",
+    "lat": 51.109043,
+    "lng": 71.473034,
+    "isCleaned": true,
+    "comment": "Excelent"
+  },
+  {
+    "id": 4,
+    "address": "EXPO",
+    "lat": 51.08906,
+    "lng": 71.416352,
+    "isCleaned": false,
+    "comment": "Messy"
+  },
+  {
+    "id": 5,
+    "address": "Astana Arena",
+    "lat": 51.108141,
+    "lng": 71.402739,
+    "isCleaned": true,
+    "comment": "Bravo"
+  },
+  {
+    "id": 6,
+    "address": "Khan Shatyr",
+    "lat": 51.132201,
+    "lng": 71.404767,
+    "isCleaned": false,
+    "comment": "Clean"
+  },
+  {
+    "id": 7,
+    "address": "Park Jeruyq",
+    "lat": 51.145512,
+    "lng": 71.489544,
+    "isCleaned": true,
+    "comment": "Great"
+  },
+  {
+    "id": 8,
+    "address": "Railway station",
+    "lat": 51.112018,
+    "lng": 71.531688,
+    "isCleaned": false,
+    "comment": "Take a trash"
+  },
+  {
+    "id": 9,
+    "address": "Hospital",
+    "lat": 51.161215,
+    "lng": 71.491711,
+    "isCleaned": true,
+    "comment": "Beautiful"
+  },
+  {
+    "id": 10,
+    "address": "Alley",
+    "lat": 51.158204,
+    "lng": 71.38632,
+    "isCleaned": false,
+    "comment": "Dirty"
+  }
+]
