@@ -8,6 +8,7 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 import { ToolbarModule } from 'primeng/toolbar';
 import { AuthComponent } from './auth/auth.component';
 import { LeafletMapComponent } from './leaflet-map/leaflet-map.component';
+import { TableComponent } from './table/table.component';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ import { LeafletMapComponent } from './leaflet-map/leaflet-map.component';
     DialogModule,
     AuthComponent,
     LeafletMapComponent,
+    TableComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
