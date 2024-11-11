@@ -4,9 +4,13 @@
   </div>
 
   <div class="p-toolbar-group-end">
-    <!-- <app-auth></app-auth> -->
-    <p-splitButton label="User name" [model]="items" appendTo="body" />
+    <app-auth></app-auth>
+    <p-splitButton
+      [label]="selectedItem.label"
+      [model]="items"
+      appendTo="body"
+    />
   </div>
 </p-toolbar>
 <app-table></app-table>
-<app-leaflet-map></app-leaflet-map>
+<app-leaflet-map [role]="selectedItem.value"></app-leaflet-map>

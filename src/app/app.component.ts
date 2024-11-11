@@ -8,6 +8,7 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 import { ToolbarModule } from 'primeng/toolbar';
 import { AuthComponent } from './auth/auth.component';
 import { LeafletMapComponent } from './leaflet-map/leaflet-map.component';
+import { ROLES } from './roles';
 import { TableComponent } from './table/table.component';
 
 @Component({
@@ -30,12 +31,31 @@ import { TableComponent } from './table/table.component';
 export class AppComponent implements OnInit {
   title = 'trash-collection-monitoring';
   items: MenuItem[] | undefined;
+  selectedItem: { label: string; value: string } = {
+    label: 'User name',
+    value: '',
+  };
 
   ngOnInit() {
     this.items = [
-      { label: 'Admin' },
-      { label: 'Manager' },
-      { label: 'Director' },
+      {
+        label: 'Admin',
+        command: () => this.changeRole({ label: 'Admin', value: ROLES.admin }),
+      },
+      {
+        label: 'Manager',
+        command: () =>
+          this.changeRole({ label: 'Manager', value: ROLES.manager }),
+      },
+      {
+        label: 'Director',
+        command: () =>
+          this.changeRole({ label: 'Director', value: ROLES.director }),
+      },
     ];
+  }
+
+  changeRole(item: { label: string; value: string }) {
+    this.selectedItem = item;
   }
 }

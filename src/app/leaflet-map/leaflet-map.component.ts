@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import data from '../../assets/data/db.json';
 
@@ -13,6 +13,11 @@ export class LeafletMapComponent implements OnInit {
   map: any;
   popupOpened: boolean | undefined;
   data: any = data;
+  selectedRole: string = '';
+  @Input()
+  set role(value: string) {
+    this.selectedRole = value;
+  }
 
   constructor() {}
 
