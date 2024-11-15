@@ -32,11 +32,11 @@ export class LeafletMapComponent implements OnInit, OnChanges {
     this.selectedRole = value;
   }
 
+  constructor() {}
+
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
   }
-
-  constructor() {}
 
   ngOnInit(): void {
     this.configMap();
@@ -48,6 +48,10 @@ export class LeafletMapComponent implements OnInit, OnChanges {
   addMarkerOnMap(): void {
     this.map.on('click', (e: L.LeafletMouseEvent) => {
       if (this.popupOpened) {
+        return;
+      }
+
+      if (this.selectedRole !== 'admin') {
         return;
       }
 
@@ -115,6 +119,10 @@ export class LeafletMapComponent implements OnInit, OnChanges {
 
   private popupOpenHandler(): void {
     this.map.on('popupopen', (e: L.LeafletMouseEvent) => {
+      if (!this.selectedRole) {
+        return e.popup.removeFrom(this.map);
+      }
+
       this.popupOpened = true;
       const id = (e.popup._source as any).customId;
       const submitButton = document.getElementById(
